@@ -70,7 +70,7 @@ public class ProveedorDAO {
         return lista;
     }
     
-    public List<ProveedorDTO> comboProveedor()
+  /*  public List<ProveedorDTO> comboProveedor()
     {
         List<ProveedorDTO> lista=new ArrayList<>();
         
@@ -85,7 +85,7 @@ public class ProveedorDAO {
             {
                 ProveedorDTO proveedor=new ProveedorDTO();
                 proveedor.setId_proveedor(rs.getInt("id_proveedor"));
-              /*  proveedor.setRut_proveedor(rs.getString("rut_proveedor"));*/
+                proveedor.setRut_proveedor(rs.getString("rut_proveedor"));
                 proveedor.setNom_proveedor(rs.getString("nom_proveedor"));
                 lista.add(proveedor);
             }
@@ -96,7 +96,7 @@ public class ProveedorDAO {
         }
         
         return lista;
-    }
+    }*/
     
     
 }

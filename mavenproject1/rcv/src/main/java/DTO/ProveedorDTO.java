@@ -15,6 +15,12 @@ public class ProveedorDTO {
     private String rut_proveedor;
     private String nom_proveedor;
 
+    @Override
+    public String toString()
+    {
+        return nom_proveedor;
+    }
+    
     public int getId_proveedor() {
         return id_proveedor;
     }

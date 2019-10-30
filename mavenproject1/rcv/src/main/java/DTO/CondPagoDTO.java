@@ -13,6 +13,13 @@ public class CondPagoDTO {
     
     private int id_condPago;
     private String nom_condPago;
+    
+    @Override
+    public String toString()
+    {
+        return nom_condPago;
+    }
+    
 
     public int getId_condPago() {
         return id_condPago;
