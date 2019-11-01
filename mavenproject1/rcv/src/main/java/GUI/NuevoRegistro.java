@@ -6,10 +6,14 @@
 package GUI;
 
 import DAO.CondPagoDAO;
+import DAO.GastoDAO;
 import DAO.ProveedorDAO;
 import DTO.CondPagoDTO;
+import DTO.GastoDTO;
 import DTO.ProveedorDTO;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -58,13 +62,14 @@ public class NuevoRegistro extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         cmbPago = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        btnTest = new javax.swing.JButton();
-        lblTest = new javax.swing.JLabel();
         txbFecha = new com.toedter.calendar.JDateChooser();
         jLabel5 = new javax.swing.JLabel();
         txbDescripcion = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        txbNDocto = new javax.swing.JTextField();
+        btnGrabarRegistro = new javax.swing.JButton();
 
         setClosable(true);
 
@@ -80,18 +85,20 @@ public class NuevoRegistro extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Fecha de Pago");
 
-        btnTest.setText("test");
-        btnTest.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTestActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Descripcion");
 
         jLabel6.setText("Estado");
 
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Seleccionar)", "Pendiente", "Pagado" }));
+
+        jLabel7.setText("N Docto");
+
+        btnGrabarRegistro.setText("Grabar");
+        btnGrabarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGrabarRegistroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,91 +107,125 @@ public class NuevoRegistro extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel1)
-                                .addGap(151, 151, 151)
-                                .addComponent(jLabel2)
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabel3))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(35, 35, 35)
-                                .addComponent(txbMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(cmbPago, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(txbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(62, 62, 62)
-                                .addComponent(jLabel4))
+                                .addGap(47, 47, 47)
+                                .addComponent(jLabel1)
+                                .addGap(117, 117, 117)
+                                .addComponent(jLabel2)
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel3))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(42, 42, 42)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txbFecha, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                    .addComponent(cmbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addGap(58, 58, 58)
+                                .addComponent(jLabel7)
+                                .addGap(92, 92, 92)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(56, 56, 56)
+                                .addComponent(txbFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addGap(43, 43, 43))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(lblTest, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnTest)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cmbProveedor, 0, 163, Short.MAX_VALUE)
+                            .addComponent(txbNDocto))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txbDescripcion)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel5)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(txbMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(34, 34, 34)
+                                            .addComponent(cmbPago, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(61, 61, 61)
+                                        .addComponent(btnGrabarRegistro)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(18, 18, 18))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(113, 113, 113))
+                .addContainerGap()
+                .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(txbMonto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cmbPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmbProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txbFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addComponent(lblTest, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnTest))
-                .addContainerGap(106, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txbNDocto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txbDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cmbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnGrabarRegistro)
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTestActionPerformed
-       
-        Object item=cmbProveedor.getSelectedItem();
-        lblTest.setText(((ProveedorDTO)item).getRut_proveedor());
+    private void btnGrabarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarRegistroActionPerformed
         
-    }//GEN-LAST:event_btnTestActionPerformed
+        GastoDTO gasto=new GastoDTO();
+        GastoDAO dao=new GastoDAO();
+        
+        int id_usr=Login.globalUsr.getId_usr();
+        Object item=cmbProveedor.getSelectedItem();
+        String rut_proveedor=((ProveedorDTO)item).getRut_proveedor();
+        Object item1=cmbPago.getSelectedItem();
+        int id_cond_pago=((CondPagoDTO)item1).getId_condPago();
+        int monto=Integer.parseInt(txbMonto.getText());
+        Date fecha=txbFecha.getDate();
+        String estado=(String)cmbEstado.getSelectedItem();
+        String descripcion= txbDescripcion.getText();
+        String nroDocto=txbNDocto.getText();
+        
+        gasto.setId_usr(id_usr);
+        gasto.setRut_provedor(rut_proveedor);
+        gasto.setId_cond_pago(id_cond_pago);
+        gasto.setMonto(monto);
+        gasto.setFecha_pago(fecha);
+        gasto.setEstado_pago(estado);
+        gasto.setDescripcion_pago(descripcion);
+        gasto.setNro_docto_pago(nroDocto);
+        
+        dao.agregaRegistro(gasto);
+        JOptionPane.showMessageDialog(rootPane, "Registro Grabado");
+        
+    }//GEN-LAST:event_btnGrabarRegistroActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnTest;
+    private javax.swing.JButton btnGrabarRegistro;
     private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<Object> cmbPago;
     private javax.swing.JComboBox<Object> cmbProveedor;
@@ -194,9 +235,10 @@ public class NuevoRegistro extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel lblTest;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txbDescripcion;
     private com.toedter.calendar.JDateChooser txbFecha;
     private javax.swing.JTextField txbMonto;
+    private javax.swing.JTextField txbNDocto;
     // End of variables declaration//GEN-END:variables
 }

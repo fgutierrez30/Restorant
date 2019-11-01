@@ -1,1 +1,10 @@
-/Users/felipegutierrez/NetBeansProjects/mavenproject1/rcv/src/main/java/CONN/Connect.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/GUI/Login.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/DTO/ProveedorDTO.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/DAO/CondPagoDAO.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/DTO/CondPagoDTO.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/GUI/NuevoRegistro.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/DTO/UsuarioDTO.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/DAO/ProveedorDAO.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/DAO/UsuarioDAO.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/CONN/Conexion.java
+/Users/felipegutierrez/Documents/GitHub/Restorant/mavenproject1/rcv/src/main/java/GUI/Proveedores.java
